@@ -1,23 +1,22 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Bank {
-	private ArrayList<Account> openedAccounts = new ArrayList<Account>();
+	private HashMap<String, Account> openedAccounts;
 
-	public void addAccount(Account account) {
-		openedAccounts.add(account);
+	public Bank() {
+		openedAccounts = new HashMap<String, Account>();
 	}
 
-	public ArrayList<Account> getOpenedAccounts() {
+	public void addAccount(String accountID, Account account) {
+		openedAccounts.put(accountID, account);
+	}
+
+	public HashMap<String, Account> getOpenedAccounts() {
 		return openedAccounts;
 	}
 
 	public Account retrieveAccount(String identificationNumber) {
-		for (int i = 0; i < openedAccounts.size(); i++) {
-			if (openedAccounts.get(i).getIdentificationNumber() == identificationNumber) {
-				return openedAccounts.get(i);
-			}
-		}
-		return null;
+		return openedAccounts.get(identificationNumber);
 	}
 
 	public void modifyAccountBalance(String identificationNumber, double amount, String operation) {

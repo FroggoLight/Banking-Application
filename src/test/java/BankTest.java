@@ -1,7 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,22 +17,22 @@ public class BankTest {
 	Account checking;
 	Account certificateOfDeposit;
 	Bank bank;
-	ArrayList<Account> testList;
+	HashMap<String, Account> testList;
 
 	@BeforeEach
 	public void setUp() {
 		bank = new Bank();
-		testList = new ArrayList<Account>();
+		testList = new HashMap<String, Account>();
 		savings = new Savings(3, SAVINGS_QUICK_ID);
 		checking = new Checking(4, CHECKING_QUICK_ID);
 		certificateOfDeposit = new CertificateOfDeposit(3, CERTIFICATE_OF_DEPOSIT_QUICK_ID, 1500);
 
-		bank.addAccount(savings);
-		bank.addAccount(checking);
-		bank.addAccount(certificateOfDeposit);
-		testList.add(savings);
-		testList.add(checking);
-		testList.add(certificateOfDeposit);
+		bank.addAccount(SAVINGS_QUICK_ID, savings);
+		bank.addAccount(CHECKING_QUICK_ID, checking);
+		bank.addAccount(CERTIFICATE_OF_DEPOSIT_QUICK_ID, certificateOfDeposit);
+		testList.put(SAVINGS_QUICK_ID, savings);
+		testList.put(CHECKING_QUICK_ID, checking);
+		testList.put(CERTIFICATE_OF_DEPOSIT_QUICK_ID, certificateOfDeposit);
 
 	}
 
@@ -45,15 +45,15 @@ public class BankTest {
 	@Test
 	public void can_add_one_account_into_bank() {
 		bank = new Bank();
-		bank.addAccount(savings);
-		assertEquals(savings, bank.getOpenedAccounts().get(0));
+		bank.addAccount(SAVINGS_QUICK_ID, savings);
+		assertEquals(savings, bank.retrieveAccount(SAVINGS_QUICK_ID));
 	}
 
 	@Test
 	public void can_add_more_than_one_account_into_bank() {
-		assertEquals(savings, bank.getOpenedAccounts().get(0));
-		assertEquals(checking, bank.getOpenedAccounts().get(1));
-		assertEquals(certificateOfDeposit, bank.getOpenedAccounts().get(2));
+		assertEquals(savings, bank.retrieveAccount(SAVINGS_QUICK_ID));
+		assertEquals(checking, bank.retrieveAccount(CHECKING_QUICK_ID));
+		assertEquals(certificateOfDeposit, bank.retrieveAccount(CERTIFICATE_OF_DEPOSIT_QUICK_ID));
 	}
 
 	@Test
