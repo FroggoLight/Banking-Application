@@ -9,15 +9,20 @@ public class CommandValidator {
 	public boolean validate(String command) {
 		String[] commandString = lower(command).split(" ");
 		String accountAction = commandString[0];
+		boolean validIdentificationNumber;
 		switch (accountAction) {
 		case "create":
+			validIdentificationNumber = checkValidIdentificationNumber(commandString[2]);
+			if (!validIdentificationNumber) {
+				return false;
+			}
 			if (bank.accountExistsByQuickId(commandString[2])) {
 				return false;
 			} else {
 				return true;
 			}
 		case "deposit":
-
+			return true;
 		default:
 			return false;
 		}
@@ -27,6 +32,14 @@ public class CommandValidator {
 		// if first argument of cmd is non-existent, return false
 		// else call child validators for respective
 		// return true;
+	}
+
+	public boolean checkValidIdentificationNumber(String identificationNumber) {
+		if (identificationNumber.length() == 8) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public String lower(String command) {

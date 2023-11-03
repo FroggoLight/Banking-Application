@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CommandValidatorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-11-03T02:39:46" hostname="Zhixians-MacBook-Pro.local" time="0.016">
+<testsuite name="CommandValidatorTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-11-03T03:01:46" hostname="Zhixians-MacBook-Pro.local" time="0.025">
   <properties/>
-  <testcase name="can_create_with_command()" classname="CommandValidatorTest" time="0.014"/>
-  <testcase name="id_can_not_be_less_than_eight_digits()" classname="CommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_account_with_id_less_than_eight_digits()" classname="CommandValidatorTest" time="0.016"/>
+  <testcase name="cannot_create_different_account_type_with_same_id()" classname="CommandValidatorTest" time="0.001"/>
+  <testcase name="can_create_with_command()" classname="CommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_account_with_existing_id()" classname="CommandValidatorTest" time="0.002"/>
+  <testcase name="cannot_create_account_with_id_more_than_eight_digits()" classname="CommandValidatorTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
