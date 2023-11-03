@@ -10,10 +10,15 @@ public class CommandValidator {
 		String[] commandString = lower(command).split(" ");
 		String accountAction = commandString[0];
 		boolean validIdentificationNumber;
+		boolean validAprValue;
 		switch (accountAction) {
 		case "create":
 			validIdentificationNumber = checkValidIdentificationNumber(commandString[2]);
+			validAprValue = checkValidAprValue(commandString[3]);
 			if (!validIdentificationNumber) {
+				return false;
+			}
+			if (!validAprValue) {
 				return false;
 			}
 			if (bank.accountExistsByQuickId(commandString[2])) {
@@ -42,6 +47,19 @@ public class CommandValidator {
 				return false;
 			}
 		} else {
+			return false;
+		}
+	}
+
+	public boolean checkValidAprValue(String aprValue) {
+		try {
+			double apr = Double.parseDouble(aprValue);
+			if ((apr > 0) && (apr < 10)) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (NumberFormatException e) {
 			return false;
 		}
 	}

@@ -56,4 +56,22 @@ public class CommandValidatorTest {
 		assertFalse(actual);
 	}
 
+	@Test
+	void cannot_create_account_with_negative_apr() {
+		boolean actual = commandValidator.validate("Create Savings 12345678 -0.4");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_account_with_apr_higher_than_ten() {
+		boolean actual = commandValidator.validate("Create Savings 12345678 12.5");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_account_with_apr_with_characters() {
+		boolean actual = commandValidator.validate("Create Savings 12345678 letter");
+		assertFalse(actual);
+	}
+
 }

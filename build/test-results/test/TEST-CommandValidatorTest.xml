@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CommandValidatorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-03T03:22:35" hostname="Zhixians-MacBook-Pro.local" time="0.019">
+<testsuite name="CommandValidatorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-03T04:15:38" hostname="Zhixians-MacBook-Pro.local" time="0.017">
   <properties/>
-  <testcase name="cannot_create_account_with_id_containing_non_numeric_value()" classname="CommandValidatorTest" time="0.019"/>
+  <testcase name="cannot_create_account_with_apr_with_characters()" classname="CommandValidatorTest" time="0.017"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
