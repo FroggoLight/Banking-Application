@@ -28,4 +28,11 @@ public class Bank {
 		}
 	}
 
+	public boolean accountExistsByQuickId(String identificationNumber) {
+		if (openedAccounts.get(identificationNumber) != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
