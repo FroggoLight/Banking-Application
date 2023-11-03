@@ -50,4 +50,10 @@ public class CommandValidatorTest {
 		assertFalse(actual);
 	}
 
+	@Test
+	void cannot_create_account_with_id_containing_non_numeric_value() {
+		boolean actual = commandValidator.validate("Create Savings a482efgh 0.4");
+		assertFalse(actual);
+	}
+
 }

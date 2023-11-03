@@ -35,8 +35,12 @@ public class CommandValidator {
 	}
 
 	public boolean checkValidIdentificationNumber(String identificationNumber) {
-		if (identificationNumber.length() == 8) {
-			return true;
+		if (identificationNumber.matches("[0-9]+")) {
+			if (identificationNumber.length() == 8) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
