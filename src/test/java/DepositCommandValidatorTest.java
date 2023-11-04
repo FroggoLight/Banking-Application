@@ -49,7 +49,7 @@ public class DepositCommandValidatorTest {
 	}
 
 	@Test
-	void cannot_deposit_into_savings_with_more_than_2500() {
+	void cannot_deposit_into_savings_with_more_than_twenty_five_hundred() {
 		boolean actual = depositCommandValidator.validate("Deposit 12345678 4500");
 		assertFalse(actual);
 	}
@@ -69,6 +69,54 @@ public class DepositCommandValidatorTest {
 	@Test
 	void cannot_deposit_into_savings_without_specified_amount() {
 		boolean actual = depositCommandValidator.validate("Deposit 12345678");
+		assertFalse(actual);
+	}
+
+	@Test
+	void can_deposit_into_checking_normally() {
+		boolean actual = depositCommandValidator.validate("Deposit 87654321 300");
+		assertTrue(actual);
+	}
+
+	@Test
+	void can_deposit_zero_into_checking() {
+		boolean actual = depositCommandValidator.validate("Deposit 87654321 0");
+		assertTrue(actual);
+	}
+
+	@Test
+	void can_deposit_into_checking_with_decimal_amount() {
+		boolean actual = depositCommandValidator.validate("Deposit 87654321 570.25");
+		assertTrue(actual);
+	}
+
+	@Test
+	void cannot_deposit_into_checking_with_negative_amount() {
+		boolean actual = depositCommandValidator.validate("Deposit 87654321 -5");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_deposit_into_checking_with_more_than_one_thousand() {
+		boolean actual = depositCommandValidator.validate("Deposit 87654321 1500");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_deposit_into_checking_with_dollar_sign() {
+		boolean actual = depositCommandValidator.validate("Deposit 87654321 $760");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_deposit_into_checking_with_non_numeric_characters() {
+		boolean actual = depositCommandValidator.validate("Deposit 87654321 eighty_five");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_deposit_into_checking_without_specified_amount() {
+		boolean actual = depositCommandValidator.validate("Deposit 87654321");
 		assertFalse(actual);
 	}
 
