@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">46</div>
+<div class="counter">86</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.043s</div>
+<div class="counter">0.052s</div>
 <p>duration</p>
 </div>
 </td>
@@ -75,33 +75,58 @@
 </tr>
 </thead>
 <tr>
+<td class="success">can_create_cd_normally()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">can_create_cd_with_another_account_with_different_id()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">can_create_cd_with_another_cd_with_different_id()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">can_create_cd_with_decimal_initial_balance()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">can_create_cd_with_whole_number_for_apr()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">can_create_checking_normally()</td>
 <td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">can_create_checking_with_another_account_with_different_id()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">can_create_checking_with_another_checking_with_different_id()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">can_create_checking_with_whole_number_for_apr()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">can_create_savings_normally()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">can_create_savings_with_another_account_with_different_id()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -115,8 +140,153 @@
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">cannot_create_checking_with_another_account_with_same_id()</td>
+<td class="success">cannot_create_cd_with_another_account_with_same_id()</td>
 <td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_another_cd_with_same_id()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_apr_above_ten()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_apr_below_zero()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_apr_with_non_numeric_characters_as_argument()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_id_containing_non_numeric_value()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_id_less_than_eight_digits()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_id_more_than_eight_digits()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_initial_balance_above_than_ten_thousand()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_initial_balance_below_than_one_thousand()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_initial_balance_just_above_than_ten_thousand()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_initial_balance_just_below_than_one_thousand()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_initial_balance_with_non_numeric_characters_as_argument()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_missing_apr()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_missing_id()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_missing_id_and_apr()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_missing_id_and_initial_balance()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_missing_initial_balance()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_missing_initial_balance_and_apr()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_only_cd_as_supplied_argument_of_create()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_swapped_arguments_variation_five()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_swapped_arguments_variation_four()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_swapped_arguments_variation_one()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_swapped_arguments_variation_seven()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_swapped_arguments_variation_six()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_swapped_arguments_variation_three()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_swapped_arguments_variation_two()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_with_unrecognizable_account_type_argument()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_cd_without_create_as_initial_argument()</td>
+<td class="success">0.015s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_checking_with_another_account_with_same_id()</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -146,26 +316,31 @@
 </tr>
 <tr>
 <td class="success">cannot_create_checking_with_id_more_than_eight_digits()</td>
-<td class="success">0s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">cannot_create_checking_with_less_than_four_arguments()</td>
 <td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">cannot_create_checking_with_misspelling_on_account_type_argument()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">cannot_create_checking_with_more_than_four_arguments()</td>
-<td class="success">0.019s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">cannot_create_checking_with_negative_apr()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_checking_with_no_apr()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_checking_with_no_id()</td>
 <td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
@@ -186,12 +361,12 @@
 </tr>
 <tr>
 <td class="success">cannot_create_checking_with_swapped_argument_sequence_variation_four()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">cannot_create_checking_with_swapped_argument_sequence_variation_one()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -201,7 +376,7 @@
 </tr>
 <tr>
 <td class="success">cannot_create_checking_with_swapped_argument_sequence_variation_two()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -211,7 +386,7 @@
 </tr>
 <tr>
 <td class="success">cannot_create_savings_with_another_account_with_same_id()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -230,8 +405,13 @@
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">cannot_create_savings_with_id_containing_non_numeric_value()</td>
+<td class="success">cannot_create_savings_with_id()</td>
 <td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_savings_with_id_containing_non_numeric_value()</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -241,11 +421,6 @@
 </tr>
 <tr>
 <td class="success">cannot_create_savings_with_id_more_than_eight_digits()</td>
-<td class="success">0.001s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">cannot_create_savings_with_less_than_four_arguments()</td>
 <td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
@@ -256,12 +431,17 @@
 </tr>
 <tr>
 <td class="success">cannot_create_savings_with_more_than_four_arguments()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">cannot_create_savings_with_negative_apr()</td>
 <td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_savings_with_no_apr()</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -271,7 +451,7 @@
 </tr>
 <tr>
 <td class="success">cannot_create_savings_with_saving_as_only_argument()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -281,26 +461,46 @@
 </tr>
 <tr>
 <td class="success">cannot_create_savings_with_swapped_argument_sequence_variation_four()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">cannot_create_savings_with_swapped_argument_sequence_variation_one()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">cannot_create_savings_with_swapped_argument_sequence_variation_three()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">cannot_create_savings_with_swapped_argument_sequence_variation_two()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">cannot_create_savings_without_create()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_with_only_apr_specified()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_with_only_id_specified()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_without_any_other_arguments_supplied_other_than_create()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cannot_create_wwith_no_account_type_specified()</td>
 <td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
@@ -314,7 +514,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.1.1</a> at Nov 4, 2023, 3:07:35 AM</p>
+<a href="http://www.gradle.org">Gradle 7.1.1</a> at Nov 4, 2023, 4:21:34 AM</p>
 </div>
 </div>
 </body>

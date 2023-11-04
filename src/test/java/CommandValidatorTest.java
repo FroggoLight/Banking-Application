@@ -25,6 +25,12 @@ public class CommandValidatorTest {
 	}
 
 	@Test
+	void can_read_command_with_inconsistent_upper_and_lower_cases() {
+		boolean actual = commandValidator.validate("CReATe CHEckinG 87654321 0.4");
+		assertTrue(actual);
+	}
+
+	@Test
 	void test_apr_function_works() {
 		boolean testCharacterString = commandValidator.checkValidAprValue("@@#$");
 		boolean testHighApr = commandValidator.checkValidAprValue("12.5");

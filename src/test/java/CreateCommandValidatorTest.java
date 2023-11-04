@@ -16,6 +16,7 @@ public class CreateCommandValidatorTest {
 		bank = new Bank();
 		savings = new Savings(0.4, "12345678");
 		checking = new Checking(1.5, "87654321");
+		certificateOfDeposit = new CertificateOfDeposit(1.2, "43215678", 1500);
 		createCommandValidator = new CreateCommandValidator(bank);
 	}
 
@@ -108,8 +109,14 @@ public class CreateCommandValidatorTest {
 	}
 
 	@Test
-	void cannot_create_savings_with_less_than_four_arguments() {
+	void cannot_create_savings_with_no_apr() {
 		boolean actual = createCommandValidator.validate("Create savings 12345678");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_savings_with_id() {
+		boolean actual = createCommandValidator.validate("Create savings 0.4");
 		assertFalse(actual);
 	}
 
@@ -247,13 +254,19 @@ public class CreateCommandValidatorTest {
 
 	@Test
 	void cannot_create_checking_with_more_than_four_arguments() {
-		boolean actual = createCommandValidator.validate("Create Checking 0.6 600");
+		boolean actual = createCommandValidator.validate("Create Checking 87654321 0.6 600");
 		assertFalse(actual);
 	}
 
 	@Test
-	void cannot_create_checking_with_less_than_four_arguments() {
+	void cannot_create_checking_with_no_apr() {
 		boolean actual = createCommandValidator.validate("Create Checking 87654321");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_checking_with_no_id() {
+		boolean actual = createCommandValidator.validate("Create Checking 0.6");
 		assertFalse(actual);
 	}
 
@@ -306,5 +319,237 @@ public class CreateCommandValidatorTest {
 	}
 
 	// --------------------------------//
+
+	@Test
+	void can_create_cd_normally() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 1.2 1500");
+		assertTrue(actual);
+	}
+
+	@Test
+	void can_create_cd_with_decimal_initial_balance() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 1.2 1500.5");
+		assertTrue(actual);
+	}
+
+	@Test
+	void can_create_cd_with_whole_number_for_apr() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 1 1500");
+		assertTrue(actual);
+	}
+
+	@Test
+	void can_create_cd_with_another_cd_with_different_id() {
+		bank.addAccount(certificateOfDeposit.getIdentificationNumber(), certificateOfDeposit);
+		boolean actual = createCommandValidator.validate("Create CD 33215678 5 2300");
+		assertTrue(actual);
+	}
+
+	@Test
+	void can_create_cd_with_another_account_with_different_id() {
+		bank.addAccount(savings.getIdentificationNumber(), savings);
+		boolean actual = createCommandValidator.validate("Create CD 43215678 8.5 2500");
+		assertTrue(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_another_cd_with_same_id() {
+		bank.addAccount(certificateOfDeposit.getIdentificationNumber(), certificateOfDeposit);
+		boolean actual = createCommandValidator.validate("Create CD 43215678 8.5 2500");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_another_account_with_same_id() {
+		bank.addAccount(savings.getIdentificationNumber(), savings);
+		boolean actual = createCommandValidator.validate("Create CD 12345678 3.2 5000");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_id_less_than_eight_digits() {
+		boolean actual = createCommandValidator.validate("Create CD 4321568 1.2 1500");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_id_more_than_eight_digits() {
+		boolean actual = createCommandValidator.validate("Create CD 432156787 1.2 1500");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_id_containing_non_numeric_value() {
+		boolean actual = createCommandValidator.validate("Create CD worm5727 1.2 1500");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_initial_balance_below_than_one_thousand() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 1.2 650");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_initial_balance_just_below_than_one_thousand() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 1.2 999.99");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_initial_balance_above_than_ten_thousand() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 1.2 15000");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_initial_balance_just_above_than_ten_thousand() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 1.2 10000.01");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_initial_balance_with_non_numeric_characters_as_argument() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 1.2 five-thousand");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_apr_below_zero() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 -1.2 1500");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_apr_above_ten() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 18 1500");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_apr_with_non_numeric_characters_as_argument() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 word 1500");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_unrecognizable_account_type_argument() {
+		boolean actual = createCommandValidator.validate("Create CDD 43215678 1.2 1500");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_missing_initial_balance() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 1.2");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_missing_initial_balance_and_apr() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_missing_id_and_initial_balance() {
+		boolean actual = createCommandValidator.validate("Create CD 1.2");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_missing_id_and_apr() {
+		boolean actual = createCommandValidator.validate("Create CD 1500");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_missing_id() {
+		boolean actual = createCommandValidator.validate("Create CD 1.2 1500");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_missing_apr() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 1500");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_swapped_arguments_variation_one() {
+		boolean actual = createCommandValidator.validate("Create CD 1.2 1500 43215678");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_swapped_arguments_variation_two() {
+		boolean actual = createCommandValidator.validate("Create CD 1.2 43215678 1500");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_swapped_arguments_variation_three() {
+		boolean actual = createCommandValidator.validate("Create CD 1500 1.2 43215678");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_swapped_arguments_variation_four() {
+		boolean actual = createCommandValidator.validate("Create CD 1500 43215678 1.2");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_swapped_arguments_variation_five() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 1500 1.2");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_swapped_arguments_variation_six() {
+		boolean actual = createCommandValidator.validate("Create 43215678 1.2 1500 CD");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_swapped_arguments_variation_seven() {
+		boolean actual = createCommandValidator.validate("Create 43215678 1500 1.2 CD");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_with_only_cd_as_supplied_argument_of_create() {
+		boolean actual = createCommandValidator.validate("Create CD");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_cd_without_create_as_initial_argument() {
+		boolean actual = createCommandValidator.validate("CD 43215678 1.2 1500");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_without_any_other_arguments_supplied_other_than_create() {
+		boolean actual = createCommandValidator.validate("Create");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_with_only_apr_specified() {
+		boolean actual = createCommandValidator.validate("Create 0.6");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_with_only_id_specified() {
+		boolean actual = createCommandValidator.validate("Create 12345678");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_wwith_no_account_type_specified() {
+		boolean actual = createCommandValidator.validate("Create 12345678 0.6");
+		assertFalse(actual);
+	}
 
 }

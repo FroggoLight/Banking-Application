@@ -1,6 +1,6 @@
 public class CreateCommandValidator extends CommandValidator {
 
-	Bank bank;
+	private Bank bank;
 
 	public CreateCommandValidator(Bank bank) {
 		this.bank = bank;
@@ -28,10 +28,14 @@ public class CreateCommandValidator extends CommandValidator {
 		try {
 			switch (commandFragment[1]) {
 			case ("cd"):
-				double cdStartingBalance = Double.parseDouble(commandFragment[4]);
-				if ((cdStartingBalance >= 1000) && (cdStartingBalance <= 10000)) {
-					return true;
-				} else {
+				try {
+					double cdStartingBalance = Double.parseDouble(commandFragment[4]);
+					if ((cdStartingBalance >= 1000) && (cdStartingBalance <= 10000)) {
+						return true;
+					} else {
+						return false;
+					}
+				} catch (NumberFormatException e) {
 					return false;
 				}
 			case ("checking"):
