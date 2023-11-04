@@ -120,4 +120,34 @@ public class DepositCommandValidatorTest {
 		assertFalse(actual);
 	}
 
+	@Test
+	void cannot_deposit_into_cd() {
+		boolean actual = depositCommandValidator.validate("Deposit 43215678 500");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_deposit_into_cd_with_zero() {
+		boolean actual = depositCommandValidator.validate("Deposit 43215678 0");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_deposit_with_no_specified_account_id() {
+		boolean actual = depositCommandValidator.validate("Deposit 200");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_deposit_with_swapped_id_and_apr_arguments() {
+		boolean actual = depositCommandValidator.validate("Deposit 200 12345678");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_deposit_without_any_other_supplied_arguments() {
+		boolean actual = depositCommandValidator.validate("Deposit");
+		assertFalse(actual);
+	}
+
 }

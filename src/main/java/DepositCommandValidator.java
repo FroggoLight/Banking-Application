@@ -41,8 +41,6 @@ public class DepositCommandValidator extends CommandValidator {
 			return checkValidTransactionBoundary(depositAmount, 2500);
 		case ("checking"):
 			return checkValidTransactionBoundary(depositAmount, 1000);
-		case ("cd"):
-			return checkValidTransactionBoundary(depositAmount, 0);
 		default:
 			return false;
 		}
