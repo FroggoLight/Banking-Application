@@ -2,10 +2,12 @@ public class CommandValidator {
 
 	private Bank bank;
 	private CreateCommandValidator createCommandValidator;
+	private DepositCommandValidator depositCommandValidator;
 
 	public CommandValidator(Bank bank) {
 		this.bank = bank;
 		this.createCommandValidator = new CreateCommandValidator(this.bank);
+		this.depositCommandValidator = new DepositCommandValidator(this.bank);
 	}
 
 	public CommandValidator() {
@@ -18,16 +20,10 @@ public class CommandValidator {
 		case "create":
 			return createCommandValidator.validate(command);
 		case "deposit":
-			return true;
+			return depositCommandValidator.validate(command);
 		default:
 			return false;
 		}
-		// if len of cmdString < 4 return false
-		// if len of cmdString > 6 return false, 5 if account type is not cd
-		// if cmd has random upper and lower case, as long as it follows it returns true
-		// if first argument of cmd is non-existent, return false
-		// else call child validators for respective
-		// return true;
 	}
 
 	public boolean checkValidIdentificationNumber(String identificationNumber) {
@@ -70,4 +66,20 @@ public class CommandValidator {
 		}
 	}
 
+	public boolean checkValidTransactionBoundary(double amount, double upperBound) {
+		if ((amount >= 0) && (amount <= upperBound)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean canConvertTransactionAmountToDouble(String amount) {
+		try {
+			double sampleValue = Double.parseDouble(amount);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
 }

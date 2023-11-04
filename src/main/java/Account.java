@@ -3,11 +3,13 @@ public abstract class Account {
 	private String identificationNumber;
 	private double apr;
 	private double balance;
+	private String accountType;
 
-	public Account(double APR, String identificationNumber, double balance) {
+	public Account(double APR, String identificationNumber, double balance, String accountType) {
 		this.apr = APR;
 		this.identificationNumber = identificationNumber;
 		this.balance = balance;
+		this.accountType = accountType;
 	}
 
 	public double getAPR() {
@@ -20,6 +22,10 @@ public abstract class Account {
 
 	public double getBalance() {
 		return Math.round(balance * 100.0) / 100.0;
+	}
+
+	public String getAccountType() {
+		return accountType;
 	}
 
 	public void modifyBalance(double amount, String operation) {

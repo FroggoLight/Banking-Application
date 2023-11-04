@@ -19,6 +19,14 @@ public class Bank {
 		return openedAccounts.get(identificationNumber);
 	}
 
+	public String getAccountType(String identificationNumber) {
+		if (accountExistsByQuickId(identificationNumber)) {
+			return retrieveAccount(identificationNumber).getAccountType();
+		} else {
+			return "unidentifiable";
+		}
+	}
+
 	public void modifyAccountBalance(String identificationNumber, double amount, String operation) {
 		Account account = retrieveAccount(identificationNumber);
 		if (account == null) {
