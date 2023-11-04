@@ -13,19 +13,33 @@ public class CreateCommandValidatorTest {
 	@BeforeEach
 	void setUp() {
 		bank = new Bank();
-		savings = new Savings(0.4, "12345678");
 		checking = new Checking(1.5, "87654321");
 		createCommandValidator = new CreateCommandValidator(bank);
 	}
 
 	@Test
-	void can_create_with_command() {
+	void can_create_normally() {
+		boolean actual = createCommandValidator.validate("Create Savings 12345678 0.4");
+		assertTrue(actual);
+	}
+
+	@Test
+	void can_create_with_whole_number_for_apr() {
+		boolean actual = createCommandValidator.validate("Create Savings 12345678 1");
+		assertTrue(actual);
+	}
+
+	@Test
+	void can_create_with_another_account_with_different_id() {
+		savings = new Savings(0.4, "22345678");
+		bank.addAccount(savings.getIdentificationNumber(), savings);
 		boolean actual = createCommandValidator.validate("Create Savings 12345678 0.4");
 		assertTrue(actual);
 	}
 
 	@Test
 	void cannot_create_account_with_existing_id() {
+		savings = new Savings(0.4, "12345678");
 		bank.addAccount(savings.getIdentificationNumber(), savings);
 		boolean actual = createCommandValidator.validate("Create Savings 12345678 0.4");
 		assertFalse(actual);
@@ -131,6 +145,12 @@ public class CreateCommandValidatorTest {
 	@Test
 	void cannot_create_savings_with_only_account_type() {
 		boolean actual = createCommandValidator.validate("Create Savings");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_create_savings_with_saving_as_only_argument() {
+		boolean actual = createCommandValidator.validate("Savings");
 		assertFalse(actual);
 	}
 

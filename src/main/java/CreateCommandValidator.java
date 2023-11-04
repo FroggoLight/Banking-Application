@@ -46,14 +46,18 @@ public class CreateCommandValidator extends CommandValidator {
 	}
 
 	public boolean checkValidArgumentNumbers(String[] commandFragment) {
-		switch (commandFragment[1]) {
-		case ("savings"):
-		case ("checking"):
-			return (commandFragment.length == 4);
-		case ("cd"):
-			return (commandFragment.length == 5);
+		try {
+			switch (commandFragment[1]) {
+			case ("savings"):
+			case ("checking"):
+				return (commandFragment.length == 4);
+			case ("cd"):
+				return (commandFragment.length == 5);
+			}
+			return false;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return false;
 		}
-		return false;
 	}
 
 }
