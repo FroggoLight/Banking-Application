@@ -6,7 +6,8 @@ public class CreateCommandValidator extends CommandValidator {
 		this.bank = bank;
 	}
 
-	public boolean validateCreate(String command) {
+	@Override
+	public boolean validate(String command) {
 		String[] commandFragment = lower(command).split(" ");
 		boolean validArgumentNumber = checkValidArgumentNumbers(commandFragment);
 		if (!validArgumentNumber) {
@@ -24,18 +25,22 @@ public class CreateCommandValidator extends CommandValidator {
 	}
 
 	public boolean checkValidStartingBalance(String[] commandFragment) {
-		switch (commandFragment[1]) {
-		case ("cd"):
-			double cdStartingBalance = Double.parseDouble(commandFragment[4]);
-			if ((cdStartingBalance >= 1000) && (cdStartingBalance <= 10000)) {
-				return true;
-			} else {
+		try {
+			switch (commandFragment[1]) {
+			case ("cd"):
+				double cdStartingBalance = Double.parseDouble(commandFragment[4]);
+				if ((cdStartingBalance >= 1000) && (cdStartingBalance <= 10000)) {
+					return true;
+				} else {
+					return false;
+				}
+			case ("checking"):
+			case ("savings"):
+				return (commandFragment.length == 4);
+			default:
 				return false;
 			}
-		case ("checking"):
-		case ("savings"):
-			return (commandFragment.length == 4);
-		default:
+		} catch (ArrayIndexOutOfBoundsException e) {
 			return false;
 		}
 	}

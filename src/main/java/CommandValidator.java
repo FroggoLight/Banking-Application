@@ -16,14 +16,7 @@ public class CommandValidator {
 		String accountAction = commandString[0];
 		switch (accountAction) {
 		case "create":
-			return createCommandValidator.validateCreate(command);
-		/*
-		 * validIdentificationNumber = checkValidIdentificationNumber(commandString[2]);
-		 * validAprValue = checkValidAprValue(commandString[3]); if
-		 * (!validIdentificationNumber) { return false; } if (!validAprValue) { return
-		 * false; } if (bank.accountExistsByQuickId(commandString[2])) { return false; }
-		 * else { return true; }
-		 */
+			return createCommandValidator.validate(command);
 		case "deposit":
 			return true;
 		default:
@@ -47,10 +40,6 @@ public class CommandValidator {
 		} else {
 			return false;
 		}
-	}
-
-	public Bank getBank() {
-		return this.bank;
 	}
 
 	public boolean checkValidAprValue(String aprValue) {

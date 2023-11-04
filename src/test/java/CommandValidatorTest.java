@@ -19,65 +19,21 @@ public class CommandValidatorTest {
 	}
 
 	@Test
-	void can_create_with_command() {
-		boolean actual = commandValidator.validate("Create Savings 12345678 0.4");
-		assertTrue(actual);
-	}
-
-	@Test
-	void cannot_create_account_with_existing_id() {
-		bank.addAccount(savings.getIdentificationNumber(), savings);
-		boolean actual = commandValidator.validate("Create Savings 12345678 0.4");
-		assertFalse(actual);
-	}
-
-	@Test
-	void cannot_create_different_account_type_with_same_id() {
-		bank.addAccount(checking.getIdentificationNumber(), checking);
-		boolean actual = commandValidator.validate("Create Savings 87654321 0.4");
-		assertFalse(actual);
-	}
-
-	@Test
-	void cannot_create_account_with_id_less_than_eight_digits() {
-		boolean actual = commandValidator.validate("Create Savings 1234567 0.4");
-		assertFalse(actual);
-	}
-
-	@Test
-	void cannot_create_account_with_id_more_than_eight_digits() {
-		boolean actual = commandValidator.validate("Create Savings 123456789 0.4");
-		assertFalse(actual);
-	}
-
-	@Test
-	void cannot_create_account_with_id_containing_non_numeric_value() {
-		boolean actual = commandValidator.validate("Create Savings a482efgh 0.4");
-		assertFalse(actual);
-	}
-
-	@Test
-	void cannot_create_account_with_negative_apr() {
-		boolean actual = commandValidator.validate("Create Savings 12345678 -0.4");
-		assertFalse(actual);
-	}
-
-	@Test
-	void cannot_create_account_with_apr_higher_than_ten() {
-		boolean actual = commandValidator.validate("Create Savings 12345678 12.5");
-		assertFalse(actual);
-	}
-
-	@Test
-	void cannot_create_account_with_apr_with_characters() {
-		boolean actual = commandValidator.validate("Create Savings 12345678 letter");
+	void can_not_read_unrecognizable_initial_argument() {
+		boolean actual = commandValidator.validate("Frog savings 12345678 0.4");
 		assertFalse(actual);
 	}
 
 	@Test
 	void test_apr_function_works() {
-		Boolean test = commandValidator.checkValidAprValue("@@#$");
-		assertFalse(test);
+		boolean testCharacterString = commandValidator.checkValidAprValue("@@#$");
+		boolean testHighApr = commandValidator.checkValidAprValue("12.5");
+		boolean testLowApr = commandValidator.checkValidAprValue("-3.2");
+		boolean testValidApr = commandValidator.checkValidAprValue("2.5");
+		assertFalse(testCharacterString);
+		assertFalse(testHighApr);
+		assertFalse(testLowApr);
+		assertTrue(testValidApr);
 	}
 
 }
