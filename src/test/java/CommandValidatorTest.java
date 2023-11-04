@@ -11,7 +11,7 @@ public class CommandValidatorTest {
 	CommandValidator commandValidator;
 
 	@BeforeEach
-	void setUP() {
+	void setUp() {
 		bank = new Bank();
 		savings = new Savings(0.4, "12345678");
 		checking = new Checking(1.5, "87654321");
@@ -72,6 +72,12 @@ public class CommandValidatorTest {
 	void cannot_create_account_with_apr_with_characters() {
 		boolean actual = commandValidator.validate("Create Savings 12345678 letter");
 		assertFalse(actual);
+	}
+
+	@Test
+	void test_apr_function_works() {
+		Boolean test = commandValidator.checkValidAprValue("@@#$");
+		assertFalse(test);
 	}
 
 }

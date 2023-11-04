@@ -1,31 +1,29 @@
 public class CommandValidator {
 
 	private Bank bank;
+	private CreateCommandValidator createCommandValidator;
 
 	public CommandValidator(Bank bank) {
 		this.bank = bank;
+		this.createCommandValidator = new CreateCommandValidator(this.bank);
+	}
+
+	public CommandValidator() {
 	}
 
 	public boolean validate(String command) {
 		String[] commandString = lower(command).split(" ");
 		String accountAction = commandString[0];
-		boolean validIdentificationNumber;
-		boolean validAprValue;
 		switch (accountAction) {
 		case "create":
-			validIdentificationNumber = checkValidIdentificationNumber(commandString[2]);
-			validAprValue = checkValidAprValue(commandString[3]);
-			if (!validIdentificationNumber) {
-				return false;
-			}
-			if (!validAprValue) {
-				return false;
-			}
-			if (bank.accountExistsByQuickId(commandString[2])) {
-				return false;
-			} else {
-				return true;
-			}
+			return createCommandValidator.validateCreate(command);
+		/*
+		 * validIdentificationNumber = checkValidIdentificationNumber(commandString[2]);
+		 * validAprValue = checkValidAprValue(commandString[3]); if
+		 * (!validIdentificationNumber) { return false; } if (!validAprValue) { return
+		 * false; } if (bank.accountExistsByQuickId(commandString[2])) { return false; }
+		 * else { return true; }
+		 */
 		case "deposit":
 			return true;
 		default:
@@ -51,6 +49,10 @@ public class CommandValidator {
 		}
 	}
 
+	public Bank getBank() {
+		return this.bank;
+	}
+
 	public boolean checkValidAprValue(String aprValue) {
 		try {
 			double apr = Double.parseDouble(aprValue);
@@ -66,6 +68,17 @@ public class CommandValidator {
 
 	public String lower(String command) {
 		return command.toLowerCase();
+	}
+
+	public boolean checkValidAccountType(String accountType) {
+		switch (accountType) {
+		case ("savings"):
+		case ("cd"):
+		case ("checking"):
+			return true;
+		default:
+			return false;
+		}
 	}
 
 }
