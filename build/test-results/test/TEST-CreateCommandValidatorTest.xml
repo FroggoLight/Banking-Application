@@ -1,27 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CreateCommandValidatorTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2023-11-04T05:48:58" hostname="Zhixians-MacBook-Pro.local" time="0.054">
+<testsuite name="CreateCommandValidatorTest" tests="46" skipped="0" failures="0" errors="0" timestamp="2023-11-04T07:07:35" hostname="Zhixians-MacBook-Pro.local" time="0.07">
   <properties/>
-  <testcase name="cannot_create_account_with_id_less_than_eight_digits()" classname="CreateCommandValidatorTest" time="0.016"/>
-  <testcase name="cannot_create_different_account_type_with_same_id()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_checking_with_more_than_four_arguments()" classname="CreateCommandValidatorTest" time="0.019"/>
+  <testcase name="cannot_create_savings_with_negative_apr()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="cannot_create_checking_with_id_containing_non_numeric_value()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_checking_with_swapped_argument_sequence_variation_three()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_checking_with_saving_as_only_argument()" classname="CreateCommandValidatorTest" time="0.001"/>
   <testcase name="cannot_create_savings_with_swapped_argument_sequence_variation_one()" classname="CreateCommandValidatorTest" time="0.001"/>
   <testcase name="cannot_create_savings_with_swapped_argument_sequence_variation_two()" classname="CreateCommandValidatorTest" time="0.001"/>
-  <testcase name="cannot_create_account_with_apr_higher_than_ten()" classname="CreateCommandValidatorTest" time="0.0"/>
-  <testcase name="cannot_create_savings_with_less_than_four_arguments()" classname="CreateCommandValidatorTest" time="0.001"/>
-  <testcase name="cannot_create_account_with_apr_with_characters()" classname="CreateCommandValidatorTest" time="0.001"/>
-  <testcase name="can_create_with_whole_number_for_apr()" classname="CreateCommandValidatorTest" time="0.002"/>
-  <testcase name="can_create_normally()" classname="CreateCommandValidatorTest" time="0.001"/>
-  <testcase name="cannot_create_savings_with_only_account_type()" classname="CreateCommandValidatorTest" time="0.001"/>
-  <testcase name="cannot_create_account_with_existing_id()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_savings_with_id_more_than_eight_digits()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_savings_with_less_than_four_arguments()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="can_create_savings_normally()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="can_create_checking_with_another_account_with_different_id()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_savings_with_id_less_than_eight_digits()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_checking_with_negative_apr()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="can_create_savings_with_another_account_with_different_id()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="cannot_create_checking_with_misspelling_on_account_type_argument()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_checking_with_less_than_four_arguments()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_checking_with_another_account_with_same_id()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="can_create_checking_with_another_checking_with_different_id()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="can_create_checking_with_whole_number_for_apr()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_checking_with_id_more_than_eight_digits()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="cannot_create_checking_with_apr_higher_than_ten()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="can_create_savings_with_another_savings_with_different_id()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_checking_with_id_less_than_eight_digits()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="cannot_create_savings_with_apr_higher_than_ten()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="cannot_create_checking_with_apr_with_characters()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="cannot_create_savings_with_only_account_type()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="cannot_create_checking_without_create()" classname="CreateCommandValidatorTest" time="0.001"/>
   <testcase name="cannot_create_savings_with_swapped_argument_sequence_variation_four()" classname="CreateCommandValidatorTest" time="0.001"/>
-  <testcase name="cannot_create_savings_without_create()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_savings_with_another_savings_with_same_id()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_checking_with_only_account_type()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="can_create_checking_normally()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="cannot_create_savings_without_create()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="cannot_create_savings_with_apr_with_characters()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="cannot_create_savings_with_misspelling_on_account_type_argument()" classname="CreateCommandValidatorTest" time="0.001"/>
   <testcase name="cannot_create_savings_with_swapped_argument_sequence_variation_three()" classname="CreateCommandValidatorTest" time="0.001"/>
-  <testcase name="can_create_with_another_account_with_different_id()" classname="CreateCommandValidatorTest" time="0.001"/>
-  <testcase name="cannot_create_with_misspelling_on_savings()" classname="CreateCommandValidatorTest" time="0.001"/>
-  <testcase name="cannot_create_account_with_negative_apr()" classname="CreateCommandValidatorTest" time="0.001"/>
-  <testcase name="cannot_create_savings_with_swapped_apr_and_id_argument()" classname="CreateCommandValidatorTest" time="0.001"/>
-  <testcase name="cannot_create_account_with_id_more_than_eight_digits()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_savings_with_another_account_with_same_id()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="cannot_create_savings_with_id_containing_non_numeric_value()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="cannot_create_checking_with_swapped_argument_sequence_variation_four()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="can_create_savings_with_whole_number_for_apr()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="cannot_create_checking_with_swapped_apr_and_id_argument()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_checking_with_another_checking_with_same_id()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="cannot_create_savings_with_swapped_apr_and_id_argument()" classname="CreateCommandValidatorTest" time="0.0"/>
   <testcase name="cannot_create_savings_with_more_than_four_arguments()" classname="CreateCommandValidatorTest" time="0.0"/>
-  <testcase name="cannot_create_account_with_id_containing_non_numeric_value()" classname="CreateCommandValidatorTest" time="0.001"/>
+  <testcase name="cannot_create_checking_with_swapped_argument_sequence_variation_one()" classname="CreateCommandValidatorTest" time="0.0"/>
+  <testcase name="cannot_create_checking_with_swapped_argument_sequence_variation_two()" classname="CreateCommandValidatorTest" time="0.001"/>
   <testcase name="cannot_create_savings_with_saving_as_only_argument()" classname="CreateCommandValidatorTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
