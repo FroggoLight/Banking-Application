@@ -11,6 +11,10 @@ public class CommandProcessor {
 		switch (commandAction) {
 		case ("create"):
 			processCreate(commandFragments);
+			break;
+		case ("deposit"):
+			processDeposit(commandFragments);
+			break;
 		}
 	}
 
@@ -35,6 +39,12 @@ public class CommandProcessor {
 		default:
 			System.out.println("something went wrong.");
 		}
+	}
+
+	public void processDeposit(String[] commandFragments) {
+		String accountId = commandFragments[1];
+		double amount = Double.parseDouble(commandFragments[2]);
+		bank.modifyAccountBalance(accountId, amount, "deposit");
 	}
 
 }
