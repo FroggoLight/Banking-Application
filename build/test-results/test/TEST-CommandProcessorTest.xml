@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CommandProcessorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-10T06:23:18" hostname="Zhixians-MBP.fios-router.home" time="0.023">
+  <properties/>
+  <testcase name="can_process_account_creation_with_another_existing_account()" classname="CommandProcessorTest" time="0.023"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
