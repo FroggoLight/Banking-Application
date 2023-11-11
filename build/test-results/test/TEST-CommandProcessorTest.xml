@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CommandProcessorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-10T22:56:36" hostname="Zhixians-MBP.fios-router.home" time="0.024">
-  <properties/>
-  <testcase name="can_deposit_four_hundred_into_checking_with_balance_of_two_hundred()" classname="CommandProcessorTest" time="0.024"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

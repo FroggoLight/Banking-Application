@@ -49,7 +49,7 @@ public class CommandProcessorTest {
 	void can_deposit_into_checking() {
 		commandProcessor.process("create checking 87654321 0.6");
 		commandProcessor.process("deposit 87654321 200");
-		assertEquals(300, bank.retrieveAccount("87654321").getBalance());
+		assertEquals(200, bank.retrieveAccount("87654321").getBalance());
 	}
 
 	@Test
