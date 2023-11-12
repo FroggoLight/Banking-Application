@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class CommandStorage {
 
-	ArrayList<String> invalidCommands;
+	private ArrayList<String> invalidCommands;
 
 	public CommandStorage() {
 		invalidCommands = new ArrayList<String>();
