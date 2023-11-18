@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CommandValidatorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-11-12T02:58:12" hostname="Zhixians-MBP.fios-router.home" time="0.003">
-  <properties/>
-  <testcase name="can_read_command_with_inconsistent_upper_and_lower_cases()" classname="CommandValidatorTest" time="0.002"/>
-  <testcase name="can_not_read_unrecognizable_initial_argument()" classname="CommandValidatorTest" time="0.0"/>
-  <testcase name="test_apr_function_works()" classname="CommandValidatorTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

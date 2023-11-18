@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CommandStorageTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-11-12T02:58:12" hostname="Zhixians-MBP.fios-router.home" time="0.002">
-  <properties/>
-  <testcase name="can_add_invalid_create_command()" classname="CommandStorageTest" time="0.001"/>
-  <testcase name="can_add_invalid_deposit_command()" classname="CommandStorageTest" time="0.0"/>
-  <testcase name="can_store_multiple_invalid_commands()" classname="CommandStorageTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
