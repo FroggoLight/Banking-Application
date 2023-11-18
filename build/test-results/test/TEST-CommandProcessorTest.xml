@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CommandProcessorTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2023-11-12T02:58:12" hostname="Zhixians-MBP.fios-router.home" time="0.024">
+  <properties/>
+  <testcase name="can_process_account_creation_for_savings()" classname="CommandProcessorTest" time="0.014"/>
+  <testcase name="can_deposit_into_savings()" classname="CommandProcessorTest" time="0.003"/>
+  <testcase name="can_deposit_four_hundred_into_checking_with_balance_of_two_hundred()" classname="CommandProcessorTest" time="0.0"/>
+  <testcase name="can_process_account_creation_for_cd()" classname="CommandProcessorTest" time="0.0"/>
+  <testcase name="can_process_account_creation_for_checking()" classname="CommandProcessorTest" time="0.0"/>
+  <testcase name="can_deposit_into_checking()" classname="CommandProcessorTest" time="0.0"/>
+  <testcase name="can_process_account_creation_with_another_existing_account()" classname="CommandProcessorTest" time="0.0"/>
+  <testcase name="can_deposit_four_hundred_into_savings_with_balance_of_two_hundred()" classname="CommandProcessorTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

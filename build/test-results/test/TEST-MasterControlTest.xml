@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MasterControlTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-11-12T02:58:12" hostname="Zhixians-MBP.fios-router.home" time="0.002">
+  <properties/>
+  <testcase name="invalid_to_create_accounts_with_same_ID()" classname="MasterControlTest" time="0.0"/>
+  <testcase name="typo_in_create_command_is_invalid()" classname="MasterControlTest" time="0.001"/>
+  <testcase name="typo_in_deposit_command_is_invalid()" classname="MasterControlTest" time="0.0"/>
+  <testcase name="two_typo_commands_both_invalid()" classname="MasterControlTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
