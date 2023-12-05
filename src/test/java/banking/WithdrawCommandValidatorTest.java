@@ -33,9 +33,21 @@ public class WithdrawCommandValidatorTest {
 	}
 
 	@Test
+	void can_withdraw_maximum_from_savings_at_once() {
+		boolean actual = withdrawCommandValidator.validate("withdraw 12345678 1000");
+		assertTrue(actual);
+	}
+
+	@Test
 	void can_withdraw_zero_from_savings() {
 		boolean actual = withdrawCommandValidator.validate("withdraw 12345678 0");
 		assertTrue(actual);
+	}
+
+	@Test
+	void cannot_withdraw_more_than_one_thousand_from_savings() {
+		boolean actual = withdrawCommandValidator.validate("withdraw 12345678 1001");
+		assertFalse(actual);
 	}
 
 	@Test
@@ -45,9 +57,21 @@ public class WithdrawCommandValidatorTest {
 	}
 
 	@Test
+	void can_withdraw_maximum_from_checking() {
+		boolean actual = withdrawCommandValidator.validate("withdraw 87654321 400");
+		assertTrue(actual);
+	}
+
+	@Test
 	void can_withdraw_zero_from_checking() {
 		boolean actual = withdrawCommandValidator.validate("withdraw 87654321 0");
 		assertTrue(actual);
+	}
+
+	@Test
+	void cannot_withdraw_more_than_four_hundred_from_checking() {
+		boolean actual = withdrawCommandValidator.validate("withdraw 87654321 450");
+		assertFalse(actual);
 	}
 
 	@Test
@@ -107,7 +131,6 @@ public class WithdrawCommandValidatorTest {
 		assertFalse(checkingCase);
 		assertFalse(cdCase);
 	}
-
 	// for savings, it becomes a switch when time has passed
 	// for cd, check if value is greater than 12
 }
