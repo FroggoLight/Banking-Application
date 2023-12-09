@@ -1,5 +1,8 @@
 package banking;
 
+import java.util.Collection;
+import java.util.Objects;
+
 public class CommandProcessor {
 	private Bank bank;
 
@@ -16,6 +19,15 @@ public class CommandProcessor {
 			break;
 		case ("deposit"):
 			processDeposit(commandFragments);
+			break;
+		case ("withdraw"):
+			processWithdraw(commandFragments);
+			break;
+		case ("transfer"):
+			processTransfer(commandFragments);
+			break;
+		case ("pass"):
+			processPassTime(commandFragments);
 			break;
 		}
 	}
@@ -39,7 +51,7 @@ public class CommandProcessor {
 			bank.addAccount(cd.getIdentificationNumber(), cd);
 			break;
 		default:
-			System.out.println("something went wrong.");
+			System.out.println("something went wrong. Unable to verify Account Type.");
 		}
 	}
 
@@ -47,6 +59,43 @@ public class CommandProcessor {
 		String accountId = commandFragments[1];
 		double amount = Double.parseDouble(commandFragments[2]);
 		bank.modifyAccountBalance(accountId, amount, "deposit");
+	}
+
+	public void processWithdraw(String[] commandFragments) {
+		String accountId = commandFragments[1];
+		double amount = Double.parseDouble(commandFragments[2]);
+		bank.modifyAccountBalance(accountId, amount, "withdraw");
+	}
+
+	public void processTransfer(String[] commandFragments) {
+		double amount = Double.parseDouble(commandFragments[3]);
+		String fromAccountId = commandFragments[1];
+		String toAccountId = commandFragments[2];
+		bank.modifyAccountBalance(fromAccountId, amount, "withdraw");
+		bank.modifyAccountBalance(toAccountId, amount, "deposit");
+	}
+
+	public void processPassTime(String[] commandFragments) {
+		int monthsToPass = Integer.parseInt(commandFragments[1]);
+		Collection<Account> allAccount = bank.getOpenedAccounts().values();
+		for (int i = 0; i < monthsToPass; i++) {
+			for (Account account : allAccount) {
+				account.incrementPassedMonths(1);
+				if (account.getBalance() <= 100) {
+					account.applyMinimumBalancePenalty();
+				}
+
+				if (Objects.equals(account.getAccountType(), "cd")) {
+					for (int j = 0; j < 4; j++) {
+						account.applyAPRToBalance();
+					}
+				} else {
+					account.applyAPRToBalance();
+				}
+			}
+		}
+		bank.clearEmptyAccounts();
+		// final check: if account has 0 balance, close the account
 	}
 
 }

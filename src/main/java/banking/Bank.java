@@ -1,12 +1,14 @@
 package banking;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Bank {
 	private HashMap<String, Account> openedAccounts;
 
 	public Bank() {
-		openedAccounts = new HashMap<String, Account>();
+		openedAccounts = new HashMap<>();
 	}
 
 	public void addAccount(String accountID, Account account) {
@@ -43,6 +45,20 @@ public class Bank {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	public void removeAccountById(String identificationNumber) {
+		openedAccounts.remove(identificationNumber);
+	}
+
+	public void clearEmptyAccounts() {
+		Iterator<Map.Entry<String, Account>> iterator = openedAccounts.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Map.Entry<String, Account> entry = iterator.next();
+			if (entry.getValue().getBalance() == 0) {
+				iterator.remove();
+			}
 		}
 	}
 }

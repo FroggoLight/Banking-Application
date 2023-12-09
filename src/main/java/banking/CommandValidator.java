@@ -5,11 +5,18 @@ public class CommandValidator {
 	private Bank bank;
 	private CreateCommandValidator createCommandValidator;
 	private DepositCommandValidator depositCommandValidator;
+	private WithdrawCommandValidator withdrawCommandValidator;
+	private TransferCommandValidator transferCommandValidator;
+	private PassTimeCommandValidator passTimeCommandValidator;
 
 	public CommandValidator(Bank bank) {
 		this.bank = bank;
 		this.createCommandValidator = new CreateCommandValidator(this.bank);
 		this.depositCommandValidator = new DepositCommandValidator(this.bank);
+		this.withdrawCommandValidator = new WithdrawCommandValidator(this.bank);
+		this.transferCommandValidator = new TransferCommandValidator(this.bank, depositCommandValidator,
+				withdrawCommandValidator);
+		this.passTimeCommandValidator = new PassTimeCommandValidator();
 	}
 
 	public CommandValidator() {
@@ -23,6 +30,12 @@ public class CommandValidator {
 			return createCommandValidator.validate(command);
 		case "deposit":
 			return depositCommandValidator.validate(command);
+		case "withdraw":
+			return withdrawCommandValidator.validate(command);
+		case "transfer":
+			return transferCommandValidator.validate(command);
+		case "pass":
+			return passTimeCommandValidator.validate(command);
 		default:
 			return false;
 		}
