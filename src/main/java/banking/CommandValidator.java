@@ -23,8 +23,7 @@ public class CommandValidator {
 	}
 
 	public boolean validate(String command) {
-		String[] commandString = lower(command).split(" ");
-		String accountAction = commandString[0];
+		String accountAction = lower(command).split(" ")[0];
 		switch (accountAction) {
 		case "create":
 			return createCommandValidator.validate(command);
@@ -43,11 +42,7 @@ public class CommandValidator {
 
 	public boolean checkValidIdentificationNumber(String identificationNumber) {
 		if (identificationNumber.matches("[0-9]+")) {
-			if (identificationNumber.length() == 8) {
-				return true;
-			} else {
-				return false;
-			}
+			return identificationNumber.length() == 8;
 		} else {
 			return false;
 		}
@@ -91,7 +86,7 @@ public class CommandValidator {
 
 	public boolean canConvertTransactionAmountToDouble(String amount) {
 		try {
-			double sampleValue = Double.parseDouble(amount);
+			Double.parseDouble(amount);
 			return true;
 		} catch (NumberFormatException e) {
 			return false;

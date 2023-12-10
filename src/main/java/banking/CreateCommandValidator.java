@@ -30,19 +30,14 @@ public class CreateCommandValidator extends CommandValidator {
 		try {
 			switch (commandFragment[1]) {
 			case ("cd"):
-				try {
-					double cdStartingBalance = Double.parseDouble(commandFragment[4]);
-					if ((cdStartingBalance >= 1000) && (cdStartingBalance <= 10000)) {
-						return true;
-					} else {
-						return false;
-					}
-				} catch (NumberFormatException e) {
+				if (!canConvertTransactionAmountToDouble(commandFragment[4])) {
 					return false;
 				}
+				double cdStartingBalance = Double.parseDouble(commandFragment[4]);
+				return (cdStartingBalance >= 1000) && (cdStartingBalance <= 10000);
 			case ("checking"):
 			case ("savings"):
-				return (commandFragment.length == 4);
+				return true;
 			default:
 				return false;
 			}
@@ -59,8 +54,9 @@ public class CreateCommandValidator extends CommandValidator {
 				return (commandFragment.length == 4);
 			case ("cd"):
 				return (commandFragment.length == 5);
+			default:
+				return false;
 			}
-			return false;
 		} catch (ArrayIndexOutOfBoundsException e) {
 			return false;
 		}

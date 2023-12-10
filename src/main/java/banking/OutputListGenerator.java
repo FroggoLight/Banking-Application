@@ -16,13 +16,9 @@ public class OutputListGenerator {
 	public List<String> generateOutput(List<String> validCommands, List<String> invalidCommands) {
 		for (int i = 0; i < validCommands.size(); i++) {
 			String[] commandFragments = validCommands.get(i).toLowerCase().split(" ");
-			if (Objects.equals(commandFragments[0], "create")) {
-				String accountID = commandFragments[2];
-				if (bank.accountExistsByQuickId(accountID)) {
-					generateAccountDetails(accountID, validCommands);
-				}
+			if ((Objects.equals(commandFragments[0], "create")) && (bank.accountExistsByQuickId(commandFragments[2]))) {
+				generateAccountDetails(commandFragments[2], validCommands);
 			}
-
 		}
 		outputList.addAll(invalidCommands);
 		return outputList;
@@ -30,10 +26,10 @@ public class OutputListGenerator {
 
 	private void generateAccountDetails(String accountID, List<String> validCommands) {
 		generateAccountState(accountID);
-		generateAccountHistory(accountID, validCommands);
+		generateAccountTransactionHistory(accountID, validCommands);
 	}
 
-	public void generateAccountHistory(String accountID, List<String> validCommands) {
+	public void generateAccountTransactionHistory(String accountID, List<String> validCommands) {
 		for (int j = 0; j < validCommands.size(); j++) {
 			String[] commandFragments = validCommands.get(j).toLowerCase().split(" ");
 			String actionCommand = commandFragments[0];
@@ -48,6 +44,8 @@ public class OutputListGenerator {
 				if (Objects.equals(commandFragments[1], accountID) || Objects.equals(commandFragments[2], accountID)) {
 					outputList.add(validCommands.get(j));
 				}
+				break;
+			default:
 				break;
 			}
 		}

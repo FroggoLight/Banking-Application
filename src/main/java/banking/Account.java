@@ -11,7 +11,7 @@ public abstract class Account {
 	private int monthsPassed;
 	private boolean withdrawable;
 
-	public Account(double APR, String identificationNumber, double balance, String accountType) {
+	protected Account(double APR, String identificationNumber, double balance, String accountType) {
 		this.apr = APR;
 		this.identificationNumber = identificationNumber;
 		this.balance = balance;

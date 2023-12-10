@@ -22,24 +22,19 @@ public class TransferCommandValidator extends CommandValidator {
 		if (!validArgumentNumber) {
 			return false;
 		} else {
-			if (!canConvertTransactionAmountToDouble(commandFragment[3])) {
+			if ((!canConvertTransactionAmountToDouble(commandFragment[3]))
+					|| (Objects.equals(commandFragment[1], commandFragment[2]))) {
 				return false;
 			}
-			if (Objects.equals(commandFragment[1], commandFragment[2])) {
-				return false;
-			}
-			if (bank.getAccountType(commandFragment[1]) == "cd" || bank.getAccountType(commandFragment[2]) == "cd") {
+			if (Objects.equals(bank.getAccountType(commandFragment[1]), "cd")
+					|| Objects.equals(bank.getAccountType(commandFragment[2]), "cd")) {
 				return false;
 			}
 			String pseudoWithdrawCommand = "withdraw " + commandFragment[1] + " " + commandFragment[3];
 			String pseudoDepositCommand = "deposit " + commandFragment[2] + " " + commandFragment[3];
 			boolean fromAccountCheck = withdrawCommandValidator.validate(pseudoWithdrawCommand);
 			boolean toAccountCheck = depositCommandValidator.validate(pseudoDepositCommand);
-			if (fromAccountCheck && toAccountCheck) {
-				return true;
-			} else {
-				return false;
-			}
+			return (fromAccountCheck && toAccountCheck);
 
 		}
 	}

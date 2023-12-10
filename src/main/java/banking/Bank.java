@@ -33,11 +33,7 @@ public class Bank {
 
 	public void modifyAccountBalance(String identificationNumber, double amount, String operation) {
 		Account account = retrieveAccount(identificationNumber);
-		if (account == null) {
-			System.out.println("account not found");
-		} else {
-			account.modifyBalance(amount, operation);
-		}
+		account.modifyBalance(amount, operation);
 	}
 
 	public boolean accountExistsByQuickId(String identificationNumber) {
@@ -46,10 +42,6 @@ public class Bank {
 		} else {
 			return false;
 		}
-	}
-
-	public void removeAccountById(String identificationNumber) {
-		openedAccounts.remove(identificationNumber);
 	}
 
 	public void clearEmptyAccounts() {
