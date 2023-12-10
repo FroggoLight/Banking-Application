@@ -38,10 +38,14 @@ public class CommandValidatorTest {
 		boolean testHighApr = commandValidator.checkValidAprValue("12.5");
 		boolean testLowApr = commandValidator.checkValidAprValue("-3.2");
 		boolean testValidApr = commandValidator.checkValidAprValue("2.5");
+		boolean testZeroApr = commandValidator.checkValidAprValue("0");
+		boolean testMaxApr = commandValidator.checkValidAprValue("10");
 		assertFalse(testCharacterString);
 		assertFalse(testHighApr);
 		assertFalse(testLowApr);
 		assertTrue(testValidApr);
+		assertTrue(testZeroApr);
+		assertTrue(testMaxApr);
 	}
 
 }

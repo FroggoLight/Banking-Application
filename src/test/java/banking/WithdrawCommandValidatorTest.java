@@ -91,14 +91,21 @@ public class WithdrawCommandValidatorTest {
 	@Test
 	void can_withdraw_from_cd_after_reaching_twelve_months_and_withdraws_full_balance() {
 		certificateOfDeposit.incrementPassedMonths(12);
-		boolean actual = withdrawCommandValidator.validate("withdraw 12345678 1500");
-		assertFalse(actual);
+		boolean actual = withdrawCommandValidator.validate("withdraw 43215678 1500");
+		assertTrue(actual);
+	}
+
+	@Test
+	void can_withdraw_from_cd_after_reaching_twelve_months_and_amount_over_the_balance() {
+		certificateOfDeposit.incrementPassedMonths(12);
+		boolean actual = withdrawCommandValidator.validate("withdraw 43215678 15000");
+		assertTrue(actual);
 	}
 
 	@Test
 	void cannot_withdraw_zero_from_cd() {
-		boolean actual = withdrawCommandValidator.validate("withdraw 12345678 0");
-		assertTrue(actual);
+		boolean actual = withdrawCommandValidator.validate("withdraw 43215678 0");
+		assertFalse(actual);
 	}
 
 	@Test
@@ -131,6 +138,52 @@ public class WithdrawCommandValidatorTest {
 		assertFalse(checkingCase);
 		assertFalse(cdCase);
 	}
-	// for savings, it becomes a switch when time has passed
-	// for cd, check if value is greater than 12
+
+	@Test
+	void cannot_withdraw_without_specifying_accountID() {
+		boolean actual = withdrawCommandValidator.validate("withdraw 250");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_withdraw_without_specifying_withdraw_amount() {
+		boolean actual = withdrawCommandValidator.validate("withdraw 12345678");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_withdraw_non_numerical_amount() {
+		boolean actual = withdrawCommandValidator.validate("withdraw 12345678 two-hundred");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_withdraw_amount_with_unknown_symbols() {
+		boolean actual = withdrawCommandValidator.validate("withdraw 12345678 $65");
+		assertFalse(actual);
+	}
+
+	@Test
+	void can_withdraw_from_account_with_decimal_values() {
+		boolean actual = withdrawCommandValidator.validate("withdraw 12345678 30.50");
+		assertTrue(actual);
+	}
+
+	@Test
+	void cannot_withdraw_amount_with_more_than_two_decimals() {
+		boolean actual = withdrawCommandValidator.validate("withdraw 12345678 30.50.322");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_withdraw_with_swapped_accountID_and_amount() {
+		boolean actual = withdrawCommandValidator.validate("withdraw 300 12345678");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_withdraw_with_no_provided_arguments() {
+		boolean actual = withdrawCommandValidator.validate("withdraw");
+		assertFalse(actual);
+	}
 }

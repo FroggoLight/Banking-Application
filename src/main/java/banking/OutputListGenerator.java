@@ -34,23 +34,19 @@ public class OutputListGenerator {
 	}
 
 	public void generateAccountHistory(String accountID, List<String> validCommands) {
-		String transactionHistory;
 		for (int j = 0; j < validCommands.size(); j++) {
 			String[] commandFragments = validCommands.get(j).toLowerCase().split(" ");
-			String actionCommand = capitalizeString(commandFragments[0]);
+			String actionCommand = commandFragments[0];
 			switch (actionCommand) {
-			case ("Deposit"):
-			case ("Withdraw"):
+			case ("deposit"):
+			case ("withdraw"):
 				if (Objects.equals(commandFragments[1], accountID)) {
-					transactionHistory = actionCommand + " " + commandFragments[1] + " " + commandFragments[2];
-					outputList.add(transactionHistory);
+					outputList.add(validCommands.get(j));
 				}
 				break;
-			case ("Transfer"):
+			case ("transfer"):
 				if (Objects.equals(commandFragments[1], accountID) || Objects.equals(commandFragments[2], accountID)) {
-					transactionHistory = actionCommand + " " + commandFragments[1] + " " + commandFragments[2] + " "
-							+ commandFragments[3];
-					outputList.add(transactionHistory);
+					outputList.add(validCommands.get(j));
 				}
 				break;
 			}

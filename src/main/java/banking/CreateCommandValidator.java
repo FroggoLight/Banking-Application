@@ -15,11 +15,11 @@ public class CreateCommandValidator extends CommandValidator {
 		if (!validArgumentNumber) {
 			return false;
 		} else {
+			boolean validStartingBalance = checkValidStartingBalance(commandFragment);
 			boolean validAccountType = checkValidAccountType(commandFragment[1]);
 			boolean validApr = checkValidAprValue(commandFragment[3]);
 			boolean validIdNumber = checkValidIdentificationNumber(commandFragment[2]);
 			boolean accountExistsById = bank.accountExistsByQuickId(commandFragment[2]);
-			boolean validStartingBalance = checkValidStartingBalance(commandFragment);
 
 			return ((validAccountType) && (validApr) && (validIdNumber) && (!accountExistsById)
 					&& (validStartingBalance));

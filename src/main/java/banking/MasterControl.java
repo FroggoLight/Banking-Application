@@ -34,7 +34,4 @@ public class MasterControl {
 		return outputListGenerator.generateOutput(validCommands, invalidCommands);
 	}
 
-	public void testDoNotImplement() {
-		List<String> testingNoUse = commandStorage.getValidCommands();
-	}
 }

@@ -56,7 +56,7 @@ public class CommandValidator {
 	public boolean checkValidAprValue(String aprValue) {
 		try {
 			double apr = Double.parseDouble(aprValue);
-			if ((apr > 0) && (apr < 10)) {
+			if ((apr >= 0) && (apr <= 10)) {
 				return true;
 			} else {
 				return false;

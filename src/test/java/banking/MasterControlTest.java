@@ -79,7 +79,6 @@ public class MasterControlTest {
 		input.add("Create cd 23456789 1.2 2000");
 
 		List<String> actual = masterControl.start(input);
-		masterControl.testDoNotImplement();
 
 		assertEquals(5, actual.size());
 		assertEquals("Savings 12345678 1000.50 0.60", actual.get(0));

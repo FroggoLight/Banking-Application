@@ -189,6 +189,18 @@ public class TransferCommandValidatorTest {
 	}
 
 	@Test
+	void cannot_transfer_with_amount_as_first_of_set_of_arguments() {
+		boolean actual = transferCommandValidator.validate("transfer 500 12345678 87654321");
+		assertFalse(actual);
+	}
+
+	@Test
+	void cannot_transfer_with_amount_as_second_of_set_of_arguments() {
+		boolean actual = transferCommandValidator.validate("transfer 12345678 500 87654321");
+		assertFalse(actual);
+	}
+
+	@Test
 	void cannot_transfer_between_account_without_specifying_transfer_amount() {
 		boolean actual = transferCommandValidator.validate("transfer 12345678 87654321");
 		assertFalse(actual);
