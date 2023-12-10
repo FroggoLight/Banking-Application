@@ -62,4 +62,10 @@ public class PassTimeCommandValidatorTest {
 		boolean actual = passTimeCommandValidator.validate("pass 6.0");
 		assertFalse(actual);
 	}
+
+	@Test
+	void cannot_pass_with_no_specified_months() {
+		boolean actual = passTimeCommandValidator.validate("pass");
+		assertFalse(actual);
+	}
 }

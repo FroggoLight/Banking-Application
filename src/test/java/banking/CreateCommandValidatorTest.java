@@ -329,6 +329,18 @@ public class CreateCommandValidatorTest {
 	}
 
 	@Test
+	void can_create_cd_with_minimum_starting_balance_of_one_thousand() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 1.2 1000");
+		assertTrue(actual);
+	}
+
+	@Test
+	void can_create_cd_with_maximum_starting_balance_of_ten_thousand() {
+		boolean actual = createCommandValidator.validate("Create CD 43215678 1.2 10000");
+		assertTrue(actual);
+	}
+
+	@Test
 	void can_create_cd_with_decimal_initial_balance() {
 		boolean actual = createCommandValidator.validate("Create CD 43215678 1.2 1500.5");
 		assertTrue(actual);

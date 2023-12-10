@@ -56,20 +56,18 @@ public abstract class Account {
 	}
 
 	public void modifyBalance(double amount, String operation) {
-		if (amount < 0) {
-			balance += 0;
-		} else {
-			if (Objects.equals(operation, "withdraw")) {
-				amount *= -1;
-				if (Objects.equals(accountType, "savings")) {
-					modifyWithdrawStatus(false);
-				}
-			}
-			balance += amount;
-			if (balance < 0) {
-				balance = 0;
+
+		if (Objects.equals(operation, "withdraw")) {
+			amount *= -1;
+			if (Objects.equals(accountType, "savings")) {
+				modifyWithdrawStatus(false);
 			}
 		}
+		balance += amount;
+		if (balance < 0) {
+			balance = 0;
+		}
+
 	}
 
 	public void applyMinimumBalancePenalty() {

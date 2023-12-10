@@ -77,14 +77,14 @@ public class WithdrawCommandValidatorTest {
 	@Test
 	void cannot_withdraw_from_cd_without_reaching_twelve_months() {
 		certificateOfDeposit.incrementPassedMonths(10);
-		boolean actual = withdrawCommandValidator.validate("withdraw 12345678 1500");
+		boolean actual = withdrawCommandValidator.validate("withdraw 43215678 1500");
 		assertFalse(actual);
 	}
 
 	@Test
 	void cannot_withdraw_from_cd_without_full_balance() {
 		certificateOfDeposit.incrementPassedMonths(12);
-		boolean actual = withdrawCommandValidator.validate("withdraw 12345678 1350");
+		boolean actual = withdrawCommandValidator.validate("withdraw 43215678 1350");
 		assertFalse(actual);
 	}
 
@@ -186,4 +186,5 @@ public class WithdrawCommandValidatorTest {
 		boolean actual = withdrawCommandValidator.validate("withdraw");
 		assertFalse(actual);
 	}
+
 }
