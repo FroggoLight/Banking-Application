@@ -549,7 +549,7 @@ public class CreateCommandValidatorTest {
 	}
 
 	@Test
-	void cannot_create_wwith_no_account_type_specified() {
+	void cannot_create_with_no_account_type_specified() {
 		boolean actual = createCommandValidator.validate("Create 12345678 0.6");
 		assertFalse(actual);
 	}

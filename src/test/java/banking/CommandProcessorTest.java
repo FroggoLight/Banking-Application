@@ -69,4 +69,6 @@ public class CommandProcessorTest {
 		assertEquals(600, bank.retrieveAccount("87654321").getBalance());
 	}
 
+	// there will be a lot of tests in this place
+
 }
