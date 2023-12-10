@@ -81,10 +81,9 @@ public class CommandProcessor {
 		for (int i = 0; i < monthsToPass; i++) {
 			for (Account account : allAccount) {
 				account.incrementPassedMonths(1);
-				if (account.getBalance() <= 100) {
+				if (account.getBalance() < 100) {
 					account.applyMinimumBalancePenalty();
 				}
-
 				if (Objects.equals(account.getAccountType(), "cd")) {
 					for (int j = 0; j < 4; j++) {
 						account.applyAPRToBalance();
@@ -95,7 +94,6 @@ public class CommandProcessor {
 			}
 		}
 		bank.clearEmptyAccounts();
-		// final check: if account has 0 balance, close the account
 	}
 
 }

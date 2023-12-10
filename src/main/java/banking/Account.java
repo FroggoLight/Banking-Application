@@ -29,7 +29,7 @@ public abstract class Account {
 	}
 
 	public double getBalance() {
-		return Math.round(balance * 100.0) / 100.0;
+		return Math.floor(balance * 100.0) / 100.0;
 	}
 
 	public String getAccountType() {
