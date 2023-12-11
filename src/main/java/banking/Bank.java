@@ -31,9 +31,9 @@ public class Bank {
 		}
 	}
 
-	public void modifyAccountBalance(String identificationNumber, double amount, String operation) {
+	public double modifyAccountBalance(String identificationNumber, double amount, String operation) {
 		Account account = retrieveAccount(identificationNumber);
-		account.modifyBalance(amount, operation);
+		return account.modifyBalance(amount, operation);
 	}
 
 	public boolean accountExistsByQuickId(String identificationNumber) {

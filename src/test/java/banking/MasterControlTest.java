@@ -95,17 +95,120 @@ public class MasterControlTest {
 		input.add("Pass 0");
 		input.add("Withdraw 12345678 300");
 		input.add("Pass 1");
+		input.add("Withdraw 12345678 200");
 		input.add("Pass 61");
 
 		List<String> actual = masterControl.start(input);
 
-		assertEquals(6, actual.size());
-		assertEquals("Savings 12345678 500.25 0.60", actual.get(0));
+		assertEquals(7, actual.size());
+		assertEquals("Savings 12345678 300.25 0.60", actual.get(0));
 		assertEquals("Deposit 12345678 700", actual.get(1));
 		assertEquals("Withdraw 12345678 200", actual.get(2));
-		assertEquals("Pass 0", actual.get(3));
-		assertEquals("Withdraw 12345678 300", actual.get(4));
-		assertEquals("Pass 61", actual.get(5));
+		assertEquals("Withdraw 12345678 200", actual.get(3));
+		assertEquals("Pass 0", actual.get(4));
+		assertEquals("Withdraw 12345678 300", actual.get(5));
+		assertEquals("Pass 61", actual.get(6));
+	}
+
+	@Test
+	void sample_test_transferring_with_less_than_account_amount_works_intended() {
+		input.add("Create savings 12345678 0.6");
+		input.add("Create checking 87654321 0.4");
+		input.add("Deposit 12345678 400");
+		input.add("Transfer 12345678 87654321 300");
+
+		List<String> actual = masterControl.start(input);
+
+		assertEquals(5, actual.size());
+		assertEquals("Savings 12345678 100.00 0.60", actual.get(0));
+		assertEquals("Deposit 12345678 400", actual.get(1));
+		assertEquals("Transfer 12345678 87654321 300", actual.get(2));
+		assertEquals("Checking 87654321 300.00 0.40", actual.get(3));
+		assertEquals("Transfer 12345678 87654321 300", actual.get(4));
+
+	}
+
+	@Test
+	void sample_test_transferring_with_more_than_account_amount_does_not_provide_more_to_other_account() {
+		input.add("Create savings 12345678 0.6");
+		input.add("Create checking 87654321 0.4");
+		input.add("Deposit 12345678 400");
+		input.add("Transfer 12345678 87654321 500");
+
+		List<String> actual = masterControl.start(input);
+
+		assertEquals(5, actual.size());
+		assertEquals("Savings 12345678 0.00 0.60", actual.get(0));
+		assertEquals("Deposit 12345678 400", actual.get(1));
+		assertEquals("Transfer 12345678 87654321 500", actual.get(2));
+		assertEquals("Checking 87654321 400.00 0.40", actual.get(3));
+		assertEquals("Transfer 12345678 87654321 500", actual.get(4));
+
+	}
+
+	@Test
+	void sample_test_cd_when_passing_month_will_correctly_increase_balance() {
+		input.add("Create cd 43215678 2.1 2000");
+		input.add("Pass 1");
+
+		List<String> actual = masterControl.start(input);
+
+		assertEquals(1, actual.size());
+		assertEquals("Cd 43215678 2014.03 2.10", actual.get(0));
+
+	}
+
+	@Test
+	void sample_test_cd_cannot_be_deposited() {
+		input.add("Create cd 43215678 2.1 2000");
+		input.add("Deposit 43215678 150");
+
+		List<String> actual = masterControl.start(input);
+
+		assertEquals(2, actual.size());
+		assertEquals("Cd 43215678 2000.00 2.10", actual.get(0));
+		assertEquals("Deposit 43215678 150", actual.get(1));
+
+	}
+
+	@Test
+	void sample_test_cd_cannot_be_withdrawn_after_twelve_months_and_at_full_or_more_balance() {
+		input.add("Create cd 43215678 2.1 2000");
+		input.add("Withdraw 43215678 2000");
+		input.add("Pass 6");
+		input.add("Withdraw 43215678 3000");
+		input.add("Pass 6");
+		input.add("Withdraw 43215678 4000");
+
+		List<String> actual = masterControl.start(input);
+
+		assertEquals(4, actual.size());
+		assertEquals("Cd 43215678 0.00 2.10", actual.get(0));
+		assertEquals("Withdraw 43215678 4000", actual.get(1));
+		assertEquals("Withdraw 43215678 2000", actual.get(2));
+		assertEquals("Withdraw 43215678 3000", actual.get(3));
+
+	}
+
+	@Test
+	void sample_test_invalid_and_valid_action_arguments() {
+		input.add("Crater savings 12345678 0.6");
+		input.add("Create savings 12345678 0.6");
+		input.add("Depot 12345678 300");
+		input.add("Past 6");
+		input.add("DeposIT 12345678 300");
+		input.add("I want to be at the bottom");
+
+		List<String> actual = masterControl.start(input);
+
+		assertEquals(6, actual.size());
+		assertEquals("Savings 12345678 300.00 0.60", actual.get(0));
+		assertEquals("DeposIT 12345678 300", actual.get(1));
+		assertEquals("Crater savings 12345678 0.6", actual.get(2));
+		assertEquals("Depot 12345678 300", actual.get(3));
+		assertEquals("Past 6", actual.get(4));
+		assertEquals("I want to be at the bottom", actual.get(5));
+
 	}
 
 }

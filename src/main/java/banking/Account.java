@@ -55,19 +55,33 @@ public abstract class Account {
 		}
 	}
 
-	public void modifyBalance(double amount, String operation) {
+	public double modifyBalance(double amount, String operation) {
 
 		if (Objects.equals(operation, "withdraw")) {
-			amount *= -1;
-			if (Objects.equals(accountType, "savings")) {
-				modifyWithdrawStatus(false);
-			}
-		}
-		balance += amount;
-		if (balance < 0) {
-			balance = 0;
+			return withdrawBalance(amount);
+		} else {
+			return depositBalance(amount);
 		}
 
+	}
+
+	public double depositBalance(double amount) {
+		this.balance += amount;
+		return 0;
+	}
+
+	public double withdrawBalance(double amount) {
+		double rollover = 0;
+		if (Objects.equals(accountType, "savings")) {
+			modifyWithdrawStatus(false);
+		}
+		if (amount > this.balance) {
+			rollover = amount - this.balance;
+			this.balance = 0;
+		} else {
+			this.balance -= amount;
+		}
+		return rollover;
 	}
 
 	public void applyMinimumBalancePenalty() {

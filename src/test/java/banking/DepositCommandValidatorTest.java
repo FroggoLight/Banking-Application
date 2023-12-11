@@ -152,4 +152,10 @@ public class DepositCommandValidatorTest {
 		assertFalse(actual);
 	}
 
+	@Test
+	void cannot_deposit_with_extra_arguments_supplied() {
+		boolean actual = depositCommandValidator.validate("Deposit 12345678 750 3");
+		assertFalse(actual);
+	}
+
 }

@@ -187,4 +187,10 @@ public class WithdrawCommandValidatorTest {
 		assertFalse(actual);
 	}
 
+	@Test
+	void cannot_withdraw_with_extra_supplied_arguments() {
+		boolean actual = withdrawCommandValidator.validate("withdraw 12345678 750 12");
+		assertFalse(actual);
+	}
+
 }

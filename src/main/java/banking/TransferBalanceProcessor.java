@@ -12,7 +12,8 @@ public class TransferBalanceProcessor {
 		double amount = Double.parseDouble(commandFragments[3]);
 		String fromAccountId = commandFragments[1];
 		String toAccountId = commandFragments[2];
-		bank.modifyAccountBalance(fromAccountId, amount, "withdraw");
+		double rollover = bank.modifyAccountBalance(fromAccountId, amount, "withdraw");
+		amount = amount - rollover;
 		bank.modifyAccountBalance(toAccountId, amount, "deposit");
 	}
 }

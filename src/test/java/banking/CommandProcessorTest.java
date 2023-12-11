@@ -96,6 +96,14 @@ public class CommandProcessorTest {
 	}
 
 	@Test
+	void can_transfer_money_without_giving_extra_specified_by_argument() {
+		commandProcessor.process("deposit 12345678 400");
+		commandProcessor.process("transfer 12345678 87654321 500");
+		assertEquals(0, bank.retrieveAccount("12345678").getBalance());
+		assertEquals(400, bank.retrieveAccount("87654321").getBalance());
+	}
+
+	@Test
 	void can_pass_time_of_one_month_and_update_account_balance() {
 		commandProcessor.process("deposit 12345678 100");
 		commandProcessor.process("deposit 87654321 150");

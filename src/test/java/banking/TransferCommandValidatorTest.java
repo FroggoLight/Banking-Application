@@ -300,6 +300,4 @@ public class TransferCommandValidatorTest {
 		assertTrue(actualB);
 	}
 
-	// to do: cd actions: to cd, from cd
-
 }
