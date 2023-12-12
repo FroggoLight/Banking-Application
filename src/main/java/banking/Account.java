@@ -32,6 +32,10 @@ public abstract class Account {
 		return Math.floor(balance * 100.0) / 100.0;
 	}
 
+	public double getTrueBalance() {
+		return this.balance;
+	}
+
 	public String getAccountType() {
 		return accountType;
 	}

@@ -48,7 +48,7 @@ public class Bank {
 		Iterator<Map.Entry<String, Account>> iterator = openedAccounts.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Map.Entry<String, Account> entry = iterator.next();
-			if (entry.getValue().getBalance() == 0) {
+			if (entry.getValue().getTrueBalance() == 0) {
 				iterator.remove();
 			}
 		}

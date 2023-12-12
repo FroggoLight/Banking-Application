@@ -1,10 +1,13 @@
 package banking;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class OutputListGenerator {
+	DecimalFormat decimalFormat = new DecimalFormat("0.00");
 	private Bank bank;
 	private List<String> outputList;
 
@@ -52,10 +55,11 @@ public class OutputListGenerator {
 	}
 
 	public void generateAccountState(String accountID) {
+		decimalFormat.setRoundingMode(RoundingMode.FLOOR);
 		Account account = bank.retrieveAccount(accountID);
 		String accountType = capitalizeString(account.getAccountType());
-		String currentAccountBalance = String.format("%.2f", account.getBalance());
-		String accountAPR = String.format("%.2f", account.getAPR());
+		String currentAccountBalance = decimalFormat.format(account.getTrueBalance());
+		String accountAPR = decimalFormat.format(account.getAPR());
 		String fullAccountDetail = accountType + " " + accountID + " " + currentAccountBalance + " " + accountAPR;
 		outputList.add(fullAccountDetail);
 	}

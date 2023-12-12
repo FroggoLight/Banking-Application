@@ -23,7 +23,7 @@ public class PassTimeProcessor {
 	public void updateAllAccountBalance(Collection<Account> allAccount) {
 		for (Account account : allAccount) {
 			account.incrementPassedMonths(1);
-			if (account.getBalance() < 100) {
+			if (account.getTrueBalance() < 100) {
 				account.applyMinimumBalancePenalty();
 			}
 			if (Objects.equals(account.getAccountType(), "cd")) {
